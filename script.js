@@ -1,4 +1,3 @@
-
 // Funzione per calcolare l'MD5 del token
 function md5Token(token) {
     return CryptoJS.MD5(token).toString(CryptoJS.enc.Hex);
