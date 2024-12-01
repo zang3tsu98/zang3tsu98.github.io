@@ -3,42 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifica Accesso</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        #message {
-            font-size: 20px;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Sapienza Token</title>
+    <!-- Carica la libreria CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Verifica Accesso</h1>
-    <div id="message"></div>
+    <div class="container">
+        <div class="left-section">
+            <img src="logo-white.svg" alt="Logo" class="logo">
+        </div>
 
-    <script>
-        const validAccessCode = "bG9naW4yMmU9c2eX5h7f9d93k3q12"; // Token offuscato
+        <div class="right-section">
+            <h1>Area Riservata</h1>
+            <p>Per accedere a questo servizio devi autenticarti </p>
+            <p>Stai accedendo a Sapienza - Sistema della didattica e degli studenti</p>
+            <form id="loginForm" action="index_errore.html" method="get" class="login-form">
+                <input type="text" id="matricola" name="matricola" placeholder="Matricola" required>
+                <input type="password" id="token" name="token" placeholder="Token" required>
+                <button type="submit">Invia</button>
+            </form>
+            <div class="additional-info">
+              <p>Questo portale é riservato a chi ha già ricevuto il token</p>
+              <p>Se non ne possiedi uno, fai una richiesta nominativa</p>
+                <p>accesso diretto con QRcode</p>
+            </div>
+        </div>
+    </div>
 
-        function checkAccessCode(url) {
-          const urlParams = new URLSearchParams(window.location.search);
-          const accessCodeFromUrl = urlParams.get("access_code");
-
-          if (accessCodeFromUrl === validAccessCode) {
-            document.getElementById("message").innerText = "Accesso consentito!";
-            document.body.style.backgroundColor = "#e0f7e0"; // Verde per successo
-          } else {
-            document.getElementById("message").innerText = "Accesso proibito!";
-            document.body.style.backgroundColor = "#f7e0e0"; // Rosso per errore
-          }
-        }
-
-        window.onload = function() {
-          checkAccessCode(window.location.href);
-        };
-    </script>
+    <!-- Aggiungi il tuo script JS -->
+    <script src="script.js"></script>
 </body>
 </html>
