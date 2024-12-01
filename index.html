@@ -40,25 +40,28 @@
     <p id="message"></p>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script> <!-- Inclusione della libreria CryptoJS -->
+  <!-- Inclusione della libreria CryptoJS -->
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
 
   <script>
-    
-    const validSessionHash = "2cf24dba5fb0a30e26e83b2ac5b9e29e1b164c5f2df94f50c615f590bfbe0771"; 
+    // Il nostro "userSession" è l'hash MD5 del token
+    const validSessionHash = "2cf24dba5fb0a30e26e83b2ac5b9e29e1b164c5f2df94f50c615f590bfbe0771"; // Hash MD5 del token originale
 
+    // Funzione per ottenere il "userSession" dall'URL
     function getUserSessionFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get("userSession"); 
+      return urlParams.get("userSession"); // In questo caso l'URL avrà ?userSession=<hash>
     }
 
-
+    // Funzione per verificare se il token è corretto
     function checkSession(userSession) {
-      const hashedInput = CryptoJS.MD5(userSession).toString(); 
-      return hashedInput === validSessionHash; 
+      const hashedInput = CryptoJS.MD5(userSession).toString(); // Calcola l'hash MD5 dell'input
+      return hashedInput === validSessionHash; // Confronta con l'hash valido
     }
 
     const userSession = getUserSessionFromURL();
 
+    // Verifica se il token è valido
     if (userSession && checkSession(userSession)) {
       document.getElementById("message").innerText = "Token valido! Accesso consentito.";
       document.body.style.backgroundColor = "#e0f7e0"; // Verde per successo
