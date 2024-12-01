@@ -5,7 +5,7 @@
     if (!token) {
         document.body.innerHTML = "<h1>Accesso non autorizzato</h1>";
     } else {
-        fetch(`https://mio-backend.onrender.com/validate_token?token=${token}`)
+        fetch(`https://tokenverifysapienzaauth.onrender.com/validate_token?token=${token}`)
             .then(response => response.json())
             .then(data => {
                 if (data.valid) {
