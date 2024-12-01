@@ -1,0 +1,149 @@
+/* Reset base */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Contenitore principale */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sezione sinistra */
+.left-section {
+    background-color: #812534;
+    width: 41%; /* Dimensione aggiornata della sezione sinistra */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-section .logo {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Sezione destra */
+.right-section {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-section h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 50px; /* Aumentato per titolo più grande */
+    color: #812534;
+    margin-bottom: 20px;
+    font-weight: 3000; /* Più snello */
+    
+}
+
+.right-section p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 19px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.login-form {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px 0;
+}
+
+.login-form input {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #812534;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333; /* Placeholder grigio */
+}
+
+.login-form input::placeholder {
+    color: #888; /* Placeholder grigio */
+    opacity: 1;
+}
+
+.login-form button {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    padding: 10px;
+    background-color: #812534;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #9b3442;
+}
+
+/* Informazioni aggiuntive */
+.additional-info {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.additional-info p {
+    margin-bottom: 10px;
+}
+
+/* Firma */
+.signature {
+    margin-top: 80px; /* Posizionata più in basso */
+    font-size: 14px;
+    color: #812534;
+    text-align: center;
+}
+
+/* Adattamenti per dispositivi più piccoli */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section {
+        width: 100%;
+        height: 150px;
+    }
+
+    .right-section {
+        padding: 20px;
+    }
+
+    .right-section h1 {
+        font-size: 28px;
+    }
+
+    .login-form button {
+        font-size: 16px;
+    }
+}
