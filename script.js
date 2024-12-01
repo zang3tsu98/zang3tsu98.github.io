@@ -83,33 +83,35 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         // Reindirizza a index_errore.html se qualcosa è sbagliato
         window.location.href = 'index_failed.html';
     }
-});
-function handleURLRouting() {
-    // Ottieni la parte dopo ".info"
-    const currentPath = window.location.search; // Contiene la stringa dopo '?'
+// Controllo dell'URL per la validità del token
+document.addEventListener("DOMContentLoaded", function () {
+    // Estrarre i parametri dall'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get("token");
 
-    // Hash MD5 del token valido
-    const validTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // Hash di 'segreto123'
+    // Token valido (hashato in MD5)
+    const validTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // MD5 di "segreto123"
 
-    // Verifica che l'URL sia esattamente '?/token=segreto123'
-    if (currentPath.startsWith("?/token=")) {
-        // Estrai il token dall'URL
-        const tokenFromURL = currentPath.replace("?/token=", "");
-
-        // Calcola l'MD5 del token dall'URL
-        const tokenMD5 = CryptoJS.MD5(tokenFromURL).toString(CryptoJS.enc.Hex);
-
-        // Se il token hash combacia, reindirizza a index_valid.html
-        if (tokenMD5 === validTokenMD5) {
-            window.location.href = 'index_valid.html';
-            return; // Termina l'esecuzione
-        }
+    // Funzione per verificare il token
+    function verifyToken(token) {
+        if (!token) return false; // Nessun token trovato
+        const hashedToken = CryptoJS.MD5(token).toString(); // Hash MD5 del token
+        return hashedToken === validTokenMD5; // Confronto con il token valido
     }
 
-    // Se non è il caso corretto, reindirizza sempre a index_failed.html
-    window.location.href = 'index_failed.html';
-}
+    // Controllo e reindirizzamento
+    if (urlToken) {
+        if (verifyToken(urlToken)) {
+            console.log("Token valido. Reindirizzamento a html_valid.");
+            window.location.href = "index_valid.html";
+        } else {
+            console.log("Token non valido. Reindirizzamento a html_failed.");
+            window.location.href = "index_failed.html";
+        }
+    } else {
+        console.log("Nessun token fornito. Reindirizzamento a html_failed.");
+        window.location.href = "index_failed.html";
+    }
+});
 
-// Chiamare la funzione all'avvio della pagina
-handleURLRouting();
 >>>>>>> b5a99b1f9ebee5aabe1e8d7ed69c7849667c3235
