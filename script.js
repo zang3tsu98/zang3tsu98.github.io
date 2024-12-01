@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Controllo e reindirizzamento
-    if (urlToken) {
+    if (urlToken !== null) { // Verifica solo se il token è presente
         if (verifyToken(urlToken)) {
             console.log("Token valido. Reindirizzamento a html_valid.");
             window.location.href = "index_valid.html";
@@ -109,9 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "index_failed.html";
         }
     } else {
-        console.log("Nessun token fornito. Reindirizzamento a html_failed.");
-        window.location.href = "index_failed.html";
+        console.log("Nessun token fornito. Rimanendo sulla pagina principale.");
     }
 });
-
->>>>>>> b5a99b1f9ebee5aabe1e8d7ed69c7849667c3235
