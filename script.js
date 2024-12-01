@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> be894e6e8822615dd75ada39993183798c0c946d
+
 // Funzione per calcolare l'MD5 del token
 function md5Token(token) {
     return CryptoJS.MD5(token).toString(CryptoJS.enc.Hex);
@@ -58,11 +55,6 @@ function handleURLRouting() {
 
 // Chiamare la funzione all'avvio della pagina
 handleURLRouting();
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> be894e6e8822615dd75ada39993183798c0c946d
 // Funzione per calcolare l'MD5 del token
 function md5Token(token) {
     return CryptoJS.MD5(token).toString(CryptoJS.enc.Hex);
@@ -90,7 +82,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         // Reindirizza a index_errore.html se qualcosa è sbagliato
         window.location.href = 'index_failed.html';
     }
-<<<<<<< HEAD
+ HEAD
 });
 function handleURLRouting() {
     // Ottieni la parte dopo ".info"
@@ -120,7 +112,6 @@ function handleURLRouting() {
 
 // Chiamare la funzione all'avvio della pagina
 handleURLRouting();
-=======
 // Controllo dell'URL per la validità del token
 document.addEventListener("DOMContentLoaded", function () {
     // Estrarre i parametri dall'URL
@@ -150,4 +141,4 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Nessun token fornito. Rimanendo sulla pagina principale.");
     }
 });
->>>>>>> be894e6e8822615dd75ada39993183798c0c946d
+
