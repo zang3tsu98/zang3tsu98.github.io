@@ -1,7 +1,21 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
-</html>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    if (!token) {
+        document.body.innerHTML = "<h1>Accesso non autorizzato</h1>";
+    } else {
+        fetch(`https://mio-backend.onrender.com/validate_token?token=${token}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.valid) {
+                    document.body.innerHTML = "<h1>Benvenuto!</h1>";
+                } else {
+                    document.body.innerHTML = "<h1>Token non valido!</h1>";
+                }
+            })
+            .catch(err => {
+                document.body.innerHTML = "<h1>Errore di connessione</h1>";
+            });
+    }
+</script>
