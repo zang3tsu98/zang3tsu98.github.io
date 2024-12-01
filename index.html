@@ -1,21 +1,71 @@
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    if (!token) {
-        document.body.innerHTML = "<h1>Accesso non autorizzato</h1>";
-    } else {
-        fetch(`https://tokenverifysapienzaauth.onrender.com/validate_token?token=${token}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.valid) {
-                    document.body.innerHTML = "<h1>Benvenuto!</h1>";
-                } else {
-                    document.body.innerHTML = "<h1>Token non valido!</h1>";
-                }
-            })
-            .catch(err => {
-                document.body.innerHTML = "<h1>Errore di connessione</h1>";
-            });
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifica Accesso</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
     }
-</script>
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Benvenuto nella Pagina Riservata!</h1>
+    <p id="message"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script> <!-- Inclusione della libreria CryptoJS -->
+
+  <script>
+    
+    const validSessionHash = "2cf24dba5fb0a30e26e83b2ac5b9e29e1b164c5f2df94f50c615f590bfbe0771"; 
+
+    function getUserSessionFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("userSession"); 
+    }
+
+
+    function checkSession(userSession) {
+      const hashedInput = CryptoJS.MD5(userSession).toString(); 
+      return hashedInput === validSessionHash; 
+    }
+
+    const userSession = getUserSessionFromURL();
+
+    if (userSession && checkSession(userSession)) {
+      document.getElementById("message").innerText = "Token valido! Accesso consentito.";
+      document.body.style.backgroundColor = "#e0f7e0"; // Verde per successo
+    } else {
+      document.getElementById("message").innerText = "Accesso proibito! Token non valido.";
+      document.body.style.backgroundColor = "#f7e0e0"; // Rosso per errore
+    }
+  </script>
+</body>
+</html>
