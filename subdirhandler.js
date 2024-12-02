@@ -43,6 +43,7 @@ function checkURL() {
     // Verifica se l'URL è esattamente x.info
     if (currentUrl === baseUrl) {
         // Se l'URL è esattamente x.info, non fare nulla
+        console.log('IF CURRENT uguale DA BASE:', window.location.href);
         return;
         
     } else{
