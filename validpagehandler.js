@@ -3,7 +3,7 @@ function checkValidAccess() {
     // Verifica se il flag "canAccessValid" è impostato in sessionStorage
     if (sessionStorage.getItem('canAccessValid') !== 'true') {
         // Se il flag non è presente o non è valido, reindirizza a index_failed
-        window.location.href = 'https://x.info/index_failed';
+        window.location.href = 'https://sapienzatoken.info/index_failed';
     }
 }
 
