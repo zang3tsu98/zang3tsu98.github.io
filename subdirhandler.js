@@ -13,7 +13,7 @@ function onLoginSuccess() {
     // Reindirizza a index_valid dopo aver effettuato il login con successo
     window.location.href = '"https://www.sapienzatoken.info"/index_valid';
 }
-
+function handleUrlRedirection() {
 // Recupera l'URL corrente
 let currentUrl = window.location.href;
 let baseUrl = '"https://www.sapienzatoken.info"';  // Assicurati che l'URL base sia corretto
@@ -52,3 +52,4 @@ console.log('URL non valido, reindirizzamento a index_failed:', currentUrl);
 window.location.href = '"https://www.sapienzatoken.info"/index_failed';
     }
 
+}
