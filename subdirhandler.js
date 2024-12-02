@@ -26,10 +26,14 @@ function md5(string) {
 // Funzione che gestisce il reindirizzamento in base all'URL
 function checkURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    const currentUrl = window.location.href;
+    let currentUrl = window.location.origin + window.location.pathname;
 
     // URL di riferimento che dovrebbe essere esattamente x.info
-    const baseUrl = "https://www.sapienzatoken.info";
+    let baseUrl = "https://www.sapienzatoken.info";
+
+    //formalizzo urls
+    currentUrl = currentUrl.endsWith('/') ? currentUrl.slice(0, -1) : currentUrl;
+    baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
     // La stringa MD5 corretta del token
     const correctTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // Sostituisci con la tua stringa MD5 corretta
@@ -40,14 +44,10 @@ function checkURL() {
         return;
     }
 
-    // Verifica se l'URL è esattamente x.info
     if (currentUrl === baseUrl) {
         // Se l'URL è esattamente x.info, non fare nulla
-        console.log('IF CURRENT uguale DA BASE:', window.location.href);
+        console.log('Sei sulla home page: ', currentUrl);
         return;
-        
-    } else{
-        console.log('IF CURRENT DIVERSO DA BASE:', window.location.href);
     }
 
     // Verifica se l'URL contiene il parametro '?token=XXXX'
