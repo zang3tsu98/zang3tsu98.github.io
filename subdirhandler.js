@@ -11,46 +11,27 @@ function onLoginSuccess() {
     grantAccessToValid();
 
     // Reindirizza a index_valid dopo aver effettuato il login con successo
-    window.location.href = 'https://sapienzatoken.info/index_valid';
+    window.location.href = '"https://www.sapienzatoken.info"/index_valid';
 }
 
-// Funzione per calcolare l'MD5 del token
-function md5Token(token) {
-    return CryptoJS.MD5(token).toString(CryptoJS.enc.Hex);
+// Recupera l'URL corrente
+let currentUrl = window.location.href;
+let baseUrl = '"https://www.sapienzatoken.info"';  // Assicurati che l'URL base sia corretto
+
+ // Escludiamo le pagine index_valid e index_failed dal controllo
+ if (currentUrl.endsWith("/index_valid") || currentUrl.endsWith("/index_failed")) {
+    // Non fare nulla su queste pagine
+    return;
 }
-// Funzione per generare l'MD5 del token
-function md5(string) {
-    return CryptoJS.MD5(string).toString(CryptoJS.enc.Hex);
+
+// 1. Controllo Home Page
+if (currentUrl === baseUrl || currentUrl === baseUrl + '/') {
+    // Se l'URL è esattamente x.info o x.info/, non fare nulla
+    console.log('Sei sulla pagina principale: ', currentUrl);
+    return;
 }
 
-// Funzione che gestisce il reindirizzamento in base all'URL
-function checkURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let currentUrl = window.location.origin + window.location.pathname;
-
-    // URL di riferimento che dovrebbe essere esattamente x.info
-    let baseUrl = "https://www.sapienzatoken.info";
-
-    //formalizzo urls
-    currentUrl = currentUrl.endsWith('/') ? currentUrl.slice(0, -1) : currentUrl;
-    baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-
-    // La stringa MD5 corretta del token
-    const correctTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // Sostituisci con la tua stringa MD5 corretta
-
-    // Escludiamo le pagine index_valid e index_failed dal controllo
-    if (currentUrl.endsWith("/index_valid") || currentUrl.endsWith("/index_failed")) {
-        // Non fare nulla su queste pagine
-        return;
-    }
-
-    if (currentUrl === baseUrl) {
-        // Se l'URL è esattamente x.info, non fare nulla
-        console.log('Sei sulla home page: ', currentUrl);
-        return;
-    }
-
-    // Verifica se l'URL contiene il parametro '?token=XXXX'
+ // Verifica se l'URL contiene il parametro '?token=XXXX'
     if (urlParams.has('token')) {
         const token = urlParams.get('token');
         const tokenMD5 = md5(token);
@@ -66,12 +47,8 @@ function checkURL() {
             window.location.href = `${baseUrl}/index_failed`;
         }
     } else {
-        // Se l'URL non contiene '?token=XXXX', reindirizza a index_failed
-        console.log('Reindirizzamento a index_failed avvenuto da 21:', window.location.href);
-
-        window.location.href = `${baseUrl}/index_failed`;
+        // 3. Se l'URL non è la home e non contiene il token, manda a failed
+console.log('URL non valido, reindirizzamento a index_failed:', currentUrl);
+window.location.href = '"https://www.sapienzatoken.info"/index_failed';
     }
-}
 
-// Esegui la verifica dell'URL quando la pagina è pronta
-window.onload = checkURL;
