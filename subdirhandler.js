@@ -19,14 +19,14 @@ function calculateMD5(token) {
       const tokenHash = calculateMD5(token);
       if (validTokens.includes(tokenHash)) {
         // Token valido, reindirizza a html_valid
-        window.location.href = "html_valid.html";
+        window.location.href = "index_valid.html";
       } else {
         // Token non valido, reindirizza a html_failed
-        window.location.href = "html_failed.html";
+        window.location.href = "index_failed.html";
       }
     } else {
       // Nessun token presente, reindirizza a html_failed
-      window.location.href = "html_failed.html";
+      window.location.href = "index_failed.html";
     }
   }
   
