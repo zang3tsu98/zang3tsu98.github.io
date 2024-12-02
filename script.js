@@ -26,32 +26,3 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         window.location.href = 'index_failed.html';
     }
 });
-// Controllo dell'URL per la validità del token
-document.addEventListener("DOMContentLoaded", function () {
-    // Estrarre i parametri dall'URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlToken = urlParams.get("token");
-
-    // Token valido (hashato in MD5)
-    const validTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // MD5 di "segreto123"
-
-    // Funzione per verificare il token
-    function verifyToken(token) {
-        if (!token) return false; // Nessun token trovato
-        const hashedToken = CryptoJS.MD5(token).toString(); // Hash MD5 del token
-        return hashedToken === validTokenMD5; // Confronto con il token valido
-    }
-
-    // Controllo e reindirizzamento
-    if (urlToken !== null) { // Verifica solo se il token è presente
-        if (verifyToken(urlToken)) {
-            console.log("Token valido. Reindirizzamento a html_valid.");
-            window.location.href = "index_valid.html";
-        } else {
-            console.log("Token non valido. Reindirizzamento a html_failed.");
-            window.location.href = "index_failed.html";
-        }
-    } else {
-        console.log("Nessun token fornito. Rimanendo sulla pagina principale.");
-    }
-});
