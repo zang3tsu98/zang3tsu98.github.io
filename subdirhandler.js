@@ -29,7 +29,7 @@ function checkURL() {
     const currentUrl = window.location.href;
 
     // URL di riferimento che dovrebbe essere esattamente x.info
-    const baseUrl = "https://x.info";
+    const baseUrl = "https://www.sapienzatoken.info";
 
     // La stringa MD5 corretta del token
     const correctTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // Sostituisci con la tua stringa MD5 corretta
