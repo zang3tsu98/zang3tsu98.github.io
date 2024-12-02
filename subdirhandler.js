@@ -44,6 +44,9 @@ function checkURL() {
     if (currentUrl === baseUrl) {
         // Se l'URL è esattamente x.info, non fare nulla
         return;
+        
+    } else{
+        console.log('IF CURRENT DIVERSO DA BASE:', window.location.href);
     }
 
     // Verifica se l'URL contiene il parametro '?token=XXXX'
