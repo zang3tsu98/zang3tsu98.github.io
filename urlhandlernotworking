@@ -1,4 +1,5 @@
 // Recupera l'URL corrente
+
 let currentUrl = window.location.href;
 let baseUrl = 'https://x.info';  // Assicurati che l'URL base sia corretto
 
@@ -90,4 +91,4 @@ function checkURL() {
 }
 
 // Esegui la verifica dell'URL quando la pagina è pronta
-window.onload = checkURL;
+

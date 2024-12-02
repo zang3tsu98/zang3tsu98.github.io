@@ -1,3 +1,4 @@
+let urlParams = new URLSearchParams(window.location.search);
 // Funzione che imposta il flag "canAccessValid" in sessionStorage
 function grantAccessToValid() {
     // Imposta un flag che indica che l'accesso a index_valid è stato effettuato tramite uno script
@@ -7,6 +8,7 @@ function grantAccessToValid() {
 // Questa funzione deve essere chiamata quando lo script ha completato l'accesso o il login
 // Ad esempio, se l'accesso è stato verificato correttamente, puoi chiamare grantAccessToValid() prima del reindirizzamento
 function onLoginSuccess() {
+    
     // Imposta il flag di accesso
     grantAccessToValid();
 
@@ -20,7 +22,7 @@ let baseUrl = '"https://www.sapienzatoken.info"';  // Assicurati che l'URL base 
 
  // Escludiamo le pagine index_valid e index_failed dal controllo
  if (currentUrl.endsWith("/index_valid") || currentUrl.endsWith("/index_failed")) {
-    // Non fare nulla su queste pagine
+    // Non fare nulla su queste pagine  
     return;
 }
 
@@ -32,6 +34,7 @@ if (currentUrl === baseUrl || currentUrl === baseUrl + '/') {
 }
 
  // Verifica se l'URL contiene il parametro '?token=XXXX'
+    
     if (urlParams.has('token')) {
         const token = urlParams.get('token');
         const tokenMD5 = md5(token);
@@ -48,8 +51,9 @@ if (currentUrl === baseUrl || currentUrl === baseUrl + '/') {
         }
     } else {
         // 3. Se l'URL non è la home e non contiene il token, manda a failed
-console.log('URL non valido, reindirizzamento a index_failed:', currentUrl);
-window.location.href = '"https://www.sapienzatoken.info"/index_failed';
+        console.log('URL non valido, reindirizzamento a index_failed 33:', currentUrl);
+        window.location.href = '"https://www.sapienzatoken.info"/index_failed';
     }
 
 }
+window.onload = handleUrlRedirection();
