@@ -1,0 +1,93 @@
+// Recupera l'URL corrente
+let currentUrl = window.location.href;
+let baseUrl = 'https://x.info';  // Assicurati che l'URL base sia corretto
+
+// 1. Controllo Home Page
+if (currentUrl === baseUrl || currentUrl === baseUrl + '/') {
+    // Se l'URL è esattamente x.info o x.info/, non fare nulla
+    console.log('Sei sulla pagina principale: ', currentUrl);
+    return;
+}
+
+// 2. Controllo URL con token
+// Verifica se l'URL contiene la stringa "?token=" e un valore
+if (currentUrl.includes('?token=')) {
+    // Recupera il token dalla query string
+    let token = new URL(currentUrl).searchParams.get('token');
+    
+    // Per ora ignoriamo il controllo del token, ma possiamo aggiungere la logica più tardi
+    console.log('Token trovato:', token);
+    
+    // Reindirizza alla pagina valid (per ora senza verificare il token)
+    window.location.href = 'https://x.info/index_valid';
+    return;
+}
+
+// 3. Se l'URL non è la home e non contiene il token, manda a failed
+console.log('URL non valido, reindirizzamento a index_failed:', currentUrl);
+window.location.href = 'https://x.info/index_failed';
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+// Funzione per calcolare l'MD5 del token
+function md5Token(token) {
+    return CryptoJS.MD5(token).toString(CryptoJS.enc.Hex);
+}
+// Funzione per generare l'MD5 del token
+function md5(string) {
+    return CryptoJS.MD5(string).toString(CryptoJS.enc.Hex);
+}
+
+// Funzione che gestisce il reindirizzamento in base all'URL
+function checkURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentUrl = window.location.origin + window.location.pathname;
+
+    // URL di riferimento che dovrebbe essere esattamente x.info
+    let baseUrl = "https://www.sapienzatoken.info";
+
+    //formalizzo urls
+    currentUrl = currentUrl.endsWith('/') ? currentUrl.slice(0, -1) : currentUrl;
+    baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+    // La stringa MD5 corretta del token
+    const correctTokenMD5 = "0cf702314bad36f54f0731695f7763b5"; // Sostituisci con la tua stringa MD5 corretta
+
+    // Escludiamo le pagine index_valid e index_failed dal controllo
+    if (currentUrl.endsWith("/index_valid") || currentUrl.endsWith("/index_failed")) {
+        // Non fare nulla su queste pagine
+        return;
+    }
+
+    if (currentUrl === baseUrl) {
+        // Se l'URL è esattamente x.info, non fare nulla
+        console.log('Sei sulla home page: ', currentUrl);
+        return;
+    }
+
+    // Verifica se l'URL contiene il parametro '?token=XXXX'
+    if (urlParams.has('token')) {
+        const token = urlParams.get('token');
+        const tokenMD5 = md5(token);
+
+        // Confronta il token MD5 con quello corretto
+        if (tokenMD5 === correctTokenMD5) {
+            // Se il token è valido, reindirizza a index_valid
+            onLoginSuccess()
+        } else {
+            // Se il token non è valido, reindirizza a index_failed
+            console.log('Reindirizzamento a index_failed avvenuto da11:', window.location.href);
+
+            window.location.href = `${baseUrl}/index_failed`;
+        }
+    } else {
+        // Se l'URL non contiene '?token=XXXX', reindirizza a index_failed
+        console.log('Reindirizzamento a index_failed avvenuto da 21:', window.location.href);
+
+        window.location.href = `${baseUrl}/index_failed`;
+    }
+}
+
+// Esegui la verifica dell'URL quando la pagina è pronta
+window.onload = checkURL;
