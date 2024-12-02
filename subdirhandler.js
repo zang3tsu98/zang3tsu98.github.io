@@ -57,10 +57,14 @@ function checkURL() {
             onLoginSuccess()
         } else {
             // Se il token non è valido, reindirizza a index_failed
+            console.log('Reindirizzamento a index_failed avvenuto da11:', window.location.href);
+
             window.location.href = `${baseUrl}/index_failed`;
         }
     } else {
         // Se l'URL non contiene '?token=XXXX', reindirizza a index_failed
+        console.log('Reindirizzamento a index_failed avvenuto da 21:', window.location.href);
+
         window.location.href = `${baseUrl}/index_failed`;
     }
 }
