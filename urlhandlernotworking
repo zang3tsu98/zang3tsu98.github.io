@@ -91,4 +91,3 @@ function checkURL() {
 }
 
 // Esegui la verifica dell'URL quando la pagina è pronta
-

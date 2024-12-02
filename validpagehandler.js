@@ -9,4 +9,3 @@ function checkValidAccess() {
 
 // Esegui il controllo quando la pagina index_valid viene caricata
 window.onload = checkValidAccess;
-
