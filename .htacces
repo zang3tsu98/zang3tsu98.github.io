@@ -1,0 +1,13 @@
+# Assicurati che il modulo rewrite sia abilitato
+RewriteEngine On
+
+# Base URL del tuo dominio
+RewriteBase /
+
+# 1. Se l'URL corrisponde esattamente a / o /?token=XXXXX, lascialo passare
+RewriteCond %{QUERY_STRING} ^token=([a-zA-Z0-9]+)$ [OR]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^ - [L]
+
+# 2. Qualunque altra richiesta reindirizza a index_failed.html
+RewriteRule ^.*$ /index_failed.html [L,R=302]
